@@ -1,0 +1,164 @@
+.searchDiv {
+    position: relative;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.searchDiv::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e0e0e0;
+    width: 100vw;
+        height: 1px;
+}
+
+.inputSearch {
+    width: 1304px;
+
+    font-style: italic;
+    border: none;
+    height: 44px;
+}
+
+.inputSearch:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.searchIcon {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background-color: #fff;
+}
+
+.searchIcon:hover {
+    color: #01b4e4;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #000;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    padding-top: 0px;
+    overflow-y: auto;
+}
+
+.dropdownContent {
+    max-width: 1340px;
+    margin: 0 auto;
+    
+    padding-right: 16px;
+}
+
+.dropdown h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown li {
+    
+border-bottom: none;
+    position: relative;
+    padding: 8px 20px;
+    cursor: pointer;
+}
+
+.dropdown li::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    height: 1px;
+    background-color: #e0e0e0;
+    transform: translateX(-50%);
+}
+
+.trendHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.trendHeader div {
+    width: 1300px;
+}
+
+.trendIcon {
+    width: 14px;
+    height: 14px;
+    
+    margin-right: 12px;
+}
+
+.trendList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.trendList li{
+    padding-left: 14px;
+}
+
+
+.trendItem {
+    border-bottom: none;
+    position: relative;
+}
+
+.trendItem::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    background-color: #ddd;
+    transform: translateX(-50%);
+    height: 1px;
+}
+
+.trendItem:hover {
+    background-color: #f5f5f5;
+}
+
+.listIcon {
+
+    font-size: 10px;
+    margin-right: 12px;
+    
+    color: #999;
+}

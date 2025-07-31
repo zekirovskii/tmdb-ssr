@@ -1,0 +1,14 @@
+.star {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    padding: 6px;
+    color: #ffd700;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+.icon{
+    font-size: 30px;
+}

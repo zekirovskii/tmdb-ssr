@@ -1,0 +1,90 @@
+.popularSection {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tabs button {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.tabs button:hover {
+    background-color: rgba(13, 37, 63, 0.05);
+}
+
+.tabs .active {
+    background-color: #01b4e4;
+    color: #fff;
+    border-color: #01b4e4;
+}
+
+.tabs .active:hover {
+    background-color: #01b4e4;
+
+}
+
+.scrollWrapper {
+    position: relative;
+}
+
+.scrollContainer {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    scrollbar-width: thin;
+    padding-bottom: 10px;
+    align-items: stretch;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+
+.cardWrapper {
+    flex: 0 0 180px;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rightFade {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(to left,
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0));
+    z-index: 5;
+}
