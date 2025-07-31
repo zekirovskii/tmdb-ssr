@@ -38,7 +38,7 @@ export default function SearchResultsPage() {
 
   return (
     <div className={css.resultsPage}>
-      <h2>Results for "{query}"</h2>
+      <h2>Results for &quot;{query}&quot;</h2>
       <div className={css.resultsGrid}>
         {results.map((item) => (
           <div
