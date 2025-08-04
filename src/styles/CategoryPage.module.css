@@ -40,3 +40,11 @@
 .loadMore:hover {
     background-color: #0291b9;
 }
+
+.noResults {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 18px;
+    padding: 20px;
+}

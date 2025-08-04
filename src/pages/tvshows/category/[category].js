@@ -144,10 +144,14 @@ export default function TvCategoryPage({ initialMovies, initialGenres, category 
         <div className={css.contentWrapper}>
           <h1 className={css.heading}>{getFormattedTitle("tvshows", category)}</h1>
           <div className={css.grid}>
-            {items.slice(0, visibleCount).map((item) => (
-              <MovieCard key={item.id} movie={item} />
-            ))}
-          </div>
+  {items.length > 0 ? (
+    items.slice(0, visibleCount).map((item) => (
+      <MovieCard key={item.id} movie={item} />
+    ))
+  ) : (
+    <p className={css.noResults}>No movies found for the selected filters.</p>
+  )}
+</div>
           {visibleCount < items.length && (
             <button className={css.loadMore} onClick={handleLoadMore}>
               Load More
