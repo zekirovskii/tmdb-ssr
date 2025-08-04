@@ -1,10 +1,23 @@
 import css from './PopoverMenu.module.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import en from "date-fns/locale/en-GB";
 
-export default function PopoverMenu({ filters, sort, onSortChange, onFilterChange, onSearch, isFilterApplied ,genres,
+export default function PopoverMenu({
+  filters,
+  sort,
+  onSortChange,
+  onCheckboxFilterChange,
+  onDateFilterChange,
+  onSearch,
+  isFilterApplied,
+  genres,
   selectedGenres,
-  onGenreChange,}) {
+  onGenreChange,
+}) {
   return (
     <aside className={css.sidebar}>
+      {/* Sort */}
       <div className={css.block}>
         <h3>Sort</h3>
         <select onChange={onSortChange} value={sort}>
@@ -19,6 +32,7 @@ export default function PopoverMenu({ filters, sort, onSortChange, onFilterChang
         </select>
       </div>
 
+      {/* Filters */}
       <div className={css.block}>
         <h3>Filters</h3>
         <label>
@@ -26,7 +40,7 @@ export default function PopoverMenu({ filters, sort, onSortChange, onFilterChang
             type="checkbox"
             name="rating"
             checked={filters.rating}
-            onChange={onFilterChange}
+            onChange={onCheckboxFilterChange}
           /> High Rating (7+)
         </label>
         <label>
@@ -34,7 +48,7 @@ export default function PopoverMenu({ filters, sort, onSortChange, onFilterChang
             type="checkbox"
             name="popularity"
             checked={filters.popularity}
-            onChange={onFilterChange}
+            onChange={onCheckboxFilterChange}
           /> High Popularity
         </label>
         <label>
@@ -42,42 +56,58 @@ export default function PopoverMenu({ filters, sort, onSortChange, onFilterChang
             type="checkbox"
             name="favorites"
             checked={filters.favorites}
-            onChange={onFilterChange}
+            onChange={onCheckboxFilterChange}
           /> My Favorites
         </label>
-        <label>
+
+        <div>
           <h3>Start Date:</h3>
-          <input
-            type="date"
-            name="startDate"
-            value={filters.startDate}
-            onChange={onFilterChange}
+          <DatePicker
+            selected={filters.startDate}
+            onChange={(date) => onDateFilterChange("startDate", date)}
+            locale={en}
+            dateFormat="dd.MM.yyyy"
+            placeholderText="dd.mm.yyyy"
+            className={css.dateInput}
+            showYearDropdown
+            showMonthDropdown
+            scrollableYearDropdown
+            yearDropdownItemNumber={100}
           />
-        </label>
-        <label>
+        </div>
+
+        <div>
           <h3>End Date:</h3>
-          <input
-            type="date"
-            name="endDate"
-            value={filters.endDate}
-            onChange={onFilterChange}
+          <DatePicker
+            selected={filters.endDate}
+            onChange={(date) => onDateFilterChange("endDate", date)}
+            locale={en}
+            dateFormat="dd.MM.yyyy"
+            placeholderText="dd.mm.yyyy"
+            className={css.dateInput}
+            showYearDropdown
+            showMonthDropdown
+            scrollableYearDropdown
+            yearDropdownItemNumber={100}
           />
-        </label>
-          </div>
-          <div className={css.block}>
+        </div>
+      </div>
+
+      {/* Genres */}
+      <div className={css.block}>
         <h3>Genres</h3>
         <div className={css.genreList}>
           {genres.map((genre) => (
-  <label key={genre.id}>
-    <input
-      type="checkbox"
-      value={genre.id}
-      checked={selectedGenres.includes(genre.id)}
-      onChange={onGenreChange}
-    />
-    <span>{genre.name}</span>
-  </label>
-))}
+            <label key={genre.id}>
+              <input
+                type="checkbox"
+                value={genre.id}
+                checked={selectedGenres.includes(genre.id)}
+                onChange={onGenreChange}
+              />
+              <span>{genre.name}</span>
+            </label>
+          ))}
         </div>
       </div>
 

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import Head from "next/head";
 import { fetchMoviesOrTvByCategory, fetchGenres } from "@services/tmdbApi";
 import MovieCard from "@components/MovieCard/MovieCard";
 import PopoverMenu from "@components/PopoverMenu/PopoverMenu";
 import { getFormattedTitle } from "@utils/formatters";
 import css from "@styles/CategoryPage.module.css";
 
-export default function MoviesCategoryPage({ initialMovies, initialGenres, category }) {
+export default function TvCategoryPage({ initialMovies, initialGenres, category }) {
   const [allItems, setAllItems] = useState(initialMovies);
   const [items, setItems] = useState(initialMovies);
   const [visibleCount, setVisibleCount] = useState(10);
@@ -15,12 +16,11 @@ export default function MoviesCategoryPage({ initialMovies, initialGenres, categ
     rating: false,
     popularity: false,
     favorites: false,
-    startDate: "",
-    endDate: "",
+    startDate: null,
+    endDate: null,
   });
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState(initialGenres);
-
 
   useEffect(() => {
     setAllItems(initialMovies);
@@ -31,19 +31,26 @@ export default function MoviesCategoryPage({ initialMovies, initialGenres, categ
       rating: false,
       popularity: false,
       favorites: false,
-      startDate: "",
-      endDate: "",
+      startDate: null,
+      endDate: null,
     });
     setSelectedGenres([]);
   }, [initialMovies, initialGenres, category]);
 
   const handleSortChange = (e) => setSort(e.target.value);
 
-  const handleFilterChange = (e) => {
-    const { name, checked, value, type: inputType } = e.target;
+  const handleCheckboxFilterChange = (e) => {
+    const { name, checked } = e.target;
     setFilters((prev) => ({
       ...prev,
-      [name]: inputType === "checkbox" ? checked : value,
+      [name]: checked,
+    }));
+  };
+
+  const handleDateFilterChange = (name, date) => {
+    setFilters((prev) => ({
+      ...prev,
+      [name]: date,
     }));
   };
 
@@ -67,14 +74,14 @@ export default function MoviesCategoryPage({ initialMovies, initialGenres, categ
 
     if (filters.startDate) {
       filtered = filtered.filter((item) => {
-        const date = new Date(item.release_date || item.first_air_date);
-        return date >= new Date(filters.startDate);
+        const date = new Date(item.first_air_date || item.release_date);
+        return date >= filters.startDate;
       });
     }
     if (filters.endDate) {
       filtered = filtered.filter((item) => {
-        const date = new Date(item.release_date || item.first_air_date);
-        return date <= new Date(filters.endDate);
+        const date = new Date(item.first_air_date || item.release_date);
+        return date <= filters.endDate;
       });
     }
     if (selectedGenres.length > 0) {
@@ -88,8 +95,8 @@ export default function MoviesCategoryPage({ initialMovies, initialGenres, categ
       const getValue = (obj, key) => {
         if (key === "title" || key === "name")
           return (obj.title || obj.name || "").toLowerCase();
-        if (key === "release_date")
-          return new Date(obj.release_date || obj.first_air_date);
+        if (key === "first_air_date" || key === "release_date")
+          return new Date(obj.first_air_date || obj.release_date);
         return obj[key] || 0;
       };
 
@@ -114,37 +121,45 @@ export default function MoviesCategoryPage({ initialMovies, initialGenres, categ
     Object.values(filters).some((value) => !!value) || selectedGenres.length > 0;
 
   return (
-    <div className={css.pageWrapper}>
-      <PopoverMenu
-        filters={filters}
-        sort={sort}
-        onSortChange={handleSortChange}
-        onFilterChange={handleFilterChange}
-        onSearch={handleSearchSubmit}
-        isFilterApplied={isFilterApplied}
-        genres={genres}
-        selectedGenres={selectedGenres}
-        onGenreChange={handleGenreChange}
-      />
+    <>
+      <Head>
+        <title>{`${getFormattedTitle("tvshows", category)} | TMDB`}</title>
+        <meta name="description" content={`Browse ${category} TV shows on TMDB`} />
+      </Head>
 
-      <div className={css.contentWrapper}>
-        <h1 className={css.heading}>{getFormattedTitle("movies", category)}</h1>
-        <div className={css.grid}>
-          {items.slice(0, visibleCount).map((item) => (
-            <MovieCard key={item.id} movie={item} />
-          ))}
+      <div className={css.pageWrapper}>
+        <PopoverMenu
+          filters={filters}
+          sort={sort}
+          onSortChange={handleSortChange}
+          onCheckboxFilterChange={handleCheckboxFilterChange}
+          onDateFilterChange={handleDateFilterChange}
+          onSearch={handleSearchSubmit}
+          isFilterApplied={isFilterApplied}
+          genres={genres}
+          selectedGenres={selectedGenres}
+          onGenreChange={handleGenreChange}
+        />
+
+        <div className={css.contentWrapper}>
+          <h1 className={css.heading}>{getFormattedTitle("tvshows", category)}</h1>
+          <div className={css.grid}>
+            {items.slice(0, visibleCount).map((item) => (
+              <MovieCard key={item.id} movie={item} />
+            ))}
+          </div>
+          {visibleCount < items.length && (
+            <button className={css.loadMore} onClick={handleLoadMore}>
+              Load More
+            </button>
+          )}
         </div>
-        {visibleCount < items.length && (
-          <button className={css.loadMore} onClick={handleLoadMore}>
-            Load More
-          </button>
-        )}
       </div>
-    </div>
+    </>
   );
 }
 
-MoviesCategoryPage.propTypes = {
+TvCategoryPage.propTypes = {
   category: PropTypes.string.isRequired,
   initialMovies: PropTypes.array.isRequired,
   initialGenres: PropTypes.array.isRequired,

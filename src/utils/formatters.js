@@ -16,3 +16,4 @@ export function getFormattedTitle(type, category) {
 
   return `${formattedCategory} ${formattedType}`;
 }
+

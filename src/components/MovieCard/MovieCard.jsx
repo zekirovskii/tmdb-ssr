@@ -5,6 +5,8 @@ import StarButton from '../StarButton/StarButton';
 import { useFavorites } from '@context/FavoritesContext';
 import Rating from '../Rating/Rating';
 
+
+
 export default function MovieCard({ movie }) {
   const {
     id,
@@ -22,7 +24,7 @@ export default function MovieCard({ movie }) {
     : '/placeholder-300x450.png';
 
   const date = (release_date || first_air_date)
-    ? new Date(release_date || first_air_date).toLocaleDateString('tr-TR', {
+    ? new Date(release_date || first_air_date).toLocaleDateString('en-GB', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',

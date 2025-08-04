@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
+import Head from "next/head";
 import { fetchDetailsById, fetchCreditsById, fetchVideosById } from "@services/tmdbApi";
 import { useFavorites } from "@context/FavoritesContext";
 import StarButton from "@components/StarButton/StarButton";
 import Rating from "@components/Rating/Rating";
 import css from "@styles/DetailPage.module.css";
 import { FaUser } from "react-icons/fa";
-
 
 export default function MovieDetailPage({ movie, credits, trailerKey }) {
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -33,6 +33,14 @@ export default function MovieDetailPage({ movie, credits, trailerKey }) {
 
   return (
     <>
+      <Head>
+        <title>{`${title} | TMDB`}</title>
+        <meta
+          name="description"
+          content={overview?.slice(0, 150) || `${title} movie details and information.`}
+        />
+      </Head>
+
       <div
         className={css.topSection}
         style={

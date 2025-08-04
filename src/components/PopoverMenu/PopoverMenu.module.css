@@ -93,3 +93,23 @@
 .genreList label:hover span {
     border-color: #01b4e4;
 }
+
+
+.dateInput {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.dateInput:focus {
+    border-color: #01b4e4;
+    outline: none;
+    box-shadow: 0 0 6px rgba(1, 180, 228, 0.4);
+}
+

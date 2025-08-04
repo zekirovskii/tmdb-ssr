@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Head from "next/head";
 import { fetchDetailsById, fetchCreditsById, fetchVideosById } from "@services/tmdbApi";
 import { useFavorites } from "@context/FavoritesContext";
 import StarButton from "@components/StarButton/StarButton";
@@ -32,6 +33,14 @@ export default function TvDetailPage({ show, credits, trailerKey }) {
 
   return (
     <>
+      <Head>
+        <title>{`${name} | TMDB`}</title>
+        <meta
+          name="description"
+          content={overview?.slice(0, 150) || `${name} TV show details and information.`}
+        />
+      </Head>
+
       <div
         className={css.topSection}
         style={
