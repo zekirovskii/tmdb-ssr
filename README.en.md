@@ -6,11 +6,20 @@ A responsive, server-side rendered movie and TV show search application using th
 
 ## 📸 Preview
 
-<!-- Insert screenshots here -->
+🏠 Home
 
 ![Homepage](/public/screenshots/homepage.png)
+
+🔍 Search Results
+
 ![Search Results](/public/screenshots/resultpage.png)
+
+🎬 Movie Detail
+
 ![Movie Detail](/public/screenshots/detailpage.png)
+
+🎛️ Filter Menu
+
 ![Filter Menu](/public/screenshots/filterpage.png)
 
 ---
@@ -93,5 +102,4 @@ You can deploy easily using [Vercel](https://vercel.com/):
 
 ## 👨‍💻 Developer
 
-**Yusuf Şengöz**  
-🔗 [LinkedIn](https://www.linkedin.com/in/yusuf-sengoz) | 🌐 [GitHub](https://github.com/zekirovskii)
+**Yusuf Şengöz**  🔗 [LinkedIn](https://www.linkedin.com/in/yusuf-sengoz) | 🌐 [GitHub](https://github.com/zekirovskii)
