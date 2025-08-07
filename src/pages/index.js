@@ -28,7 +28,7 @@ export async function getServerSideProps() {
     const whatsPopular = await fetchWhatsPopular("movie");
 
     return {
-      props: { trending, latestTrailers, whatsPopular }, // ✅
+      props: { trending, latestTrailers, whatsPopular },
     };
   } catch (error) {
     console.error("Home SSR Error:", error);

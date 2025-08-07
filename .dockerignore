@@ -1,0 +1,21 @@
+node_modules
+
+# Build 
+.next
+dist
+
+# Sistem dosyaları
+.DS_Store
+
+# Log 
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Git
+.git
+.gitignore
+
+# IDE/editor 
+.vscode
+.idea

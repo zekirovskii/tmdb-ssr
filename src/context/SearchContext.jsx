@@ -6,13 +6,13 @@ export function SearchProvider({ children }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
 
-  // Dropdown Controls
+  // Dropdown 
   const openDrop = useCallback(() => setShowDropdown(true), []);
   const closeDrop = useCallback(() => setShowDropdown(false), []);
   const toggleDrop = useCallback(() => setShowDropdown(prev => !prev), []);
   const forceOpenDropdown = useCallback(() => setShowDropdown(true), []);
 
-  // Search Input Controls
+  // Search Input 
   const showSearchInput = useCallback(() => setIsSearchVisible(true), []);
   const hideSearchInput = useCallback(() => setIsSearchVisible(false), []);
   const toggleSearchInput = useCallback(() => setIsSearchVisible(prev => !prev), []);
