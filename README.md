@@ -6,7 +6,6 @@ A responsive, server-side rendered movie and TV show search application using th
 
 ## 📸 Preview
 
-=======
 🏠 HOME
 
 ![Homepage](/public/screenshots/homepage.png)
