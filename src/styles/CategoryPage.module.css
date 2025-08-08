@@ -48,3 +48,26 @@
     font-size: 18px;
     padding: 20px;
 }
+
+@media (max-width: 767px) {
+    .pageWrapper {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .filtersBar {
+        flex: none;
+        width: 100%;
+        order: 0;
+    }
+
+    .contentWrapper {
+        order: 1;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+}

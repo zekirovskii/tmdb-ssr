@@ -5,9 +5,12 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 
 // UI --> TMDB
 const typeMap = {
-  movies: 'movie',
-  tvshows: 'tv',
+  movies: "movie",
+  movie: "movie",
+  tvshows: "tv",
+  tv: "tv",
 };
+
 
 // Hero --> Background
 export const fetchTrending = async (timeWindow = "day") => {
@@ -32,29 +35,40 @@ export async function searchItem(query, page = 1) {
 // Latest Trailers
 export const fetchTrailersByCategory = async (category = "popular") => {
   let endpoint;
+  let type = "movie"; // default
 
   switch (category) {
     case "streaming":
       endpoint = "/movie/now_playing";
+      type = "movie";
       break;
     case "on_tv":
       endpoint = "/tv/on_the_air";
+      type = "tv";
       break;
     case "for_rent":
       endpoint = "/movie/upcoming";
+      type = "movie";
       break;
     case "in_theaters":
       endpoint = "/movie/now_playing";
+      type = "movie";
       break;
     default:
       endpoint = "/movie/popular";
+      type = "movie";
   }
 
   const response = await axios.get(`${BASE_URL}${endpoint}`, {
     params: { api_key: API_KEY, language: "en-US" }
   });
-  return response.data.results;
+
+  return response.data.results.map(item => ({
+    ...item,
+    media_type: type
+  }));
 };
+
 
 // Whats Popular
 export const fetchWhatsPopular = async (type = "movie") => {
@@ -95,13 +109,22 @@ export async function fetchCreditsById(type, id) {
 
 // Trailer
 export async function fetchVideosById(type, id) {
-  const mappedType = typeMap[type] || type; 
+  if (!type) {
+    console.warn(`fetchVideosById: 'type' is missing for id ${id}`);
+    return { results: [] };
+  }
+
+  const mappedType = typeMap[type] || type;
+  if (!mappedType) {
+    console.warn(`fetchVideosById: 'mappedType' not found for type ${type}`);
+    return { results: [] };
+  }
 
   const url = `${BASE_URL}/${mappedType}/${id}/videos?api_key=${API_KEY}&language=en-US`;
-  
   const res = await fetch(url);
   return await res.json();
 }
+
 
 // Genre
 export async function fetchGenres(type) {
